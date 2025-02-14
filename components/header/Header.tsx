@@ -1,15 +1,41 @@
-import Link from "next/link";
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import DesktopNav from "../navbar/DesktopNav";
+import { AlignJustify, X } from "lucide-react";
+import MobileNav from "../navbar/MobileNav";
 
 const Header = () => {
+  const [isMenuVisible, setMenuVisible] = useState(false);
+
+  useEffect(() => {
+    window.onclick = (e) => {
+      scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      setMenuVisible(false);
+    };
+  }),
+    [];
   return (
-    <div>
-      <nav>
-        <Link href="/">Home</Link>
-        <Link href="/news">Add News</Link>
-        <Link href="/admin">Admin</Link>
-        <Link href="/login">Login</Link>
-      </nav>
+    <div className="flex justify-between items-center p-4">
+      <h1>Quick News</h1>
+      <DesktopNav />
+      <AlignJustify
+        onClick={(e) => {
+          e.stopPropagation();
+          setMenuVisible(!isMenuVisible);
+        }}
+        className={`${
+          !isMenuVisible ? "block" : "hidden"
+        } md:hidden z-30 cursor-pointer`}
+      />
+      <X
+        className={`${
+          isMenuVisible ? "block" : "hidden"
+        } md:hidden z-30 cursor-pointer`}
+      />
+      <MobileNav isMenuVisible={isMenuVisible} />
     </div>
   );
 };
