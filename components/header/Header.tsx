@@ -18,7 +18,7 @@ const Header = () => {
   }),
     [];
   return (
-    <div className="flex justify-between items-center p-4">
+    <div className="flex justify-between items-center p-4 fixed top-2 w-[94vw] mx-auto z-30 bg-zinc-500/50 backdrop-blur-sm rounded-2xl ml-[3vw] border-2 border-zinc-50 shadow-2xl shadow-white/10">
       <h1>Quick News</h1>
       <DesktopNav />
       <AlignJustify
