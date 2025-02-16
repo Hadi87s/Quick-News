@@ -2,14 +2,16 @@
 import Link from "next/link";
 import React from "react";
 import NavLink from "./nav-link/NavLink";
+import { links } from "@/common/data";
 
 const DesktopNav = () => {
   return (
     <nav className="hidden md:flex gap-x-4">
-      <NavLink path="/">Home</NavLink>
-      <NavLink path="/news">Add News</NavLink>
-      <NavLink path="/admin">Admin</NavLink>
-      <NavLink path="/login">Login</NavLink>
+      {links.map((link, index) => (
+        <NavLink path={link.path} key={index}>
+          {link.text}
+        </NavLink>
+      ))}
     </nav>
   );
 };
