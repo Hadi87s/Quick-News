@@ -1,6 +1,6 @@
 import React from "react";
 import { INews } from "@/Types/@types";
-import Image from "next/image";
+
 interface IProps {
   news: INews;
 }
