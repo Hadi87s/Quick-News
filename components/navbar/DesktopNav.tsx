@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import React from "react";
 import NavLink from "./nav-link/NavLink";
 import { links } from "@/common/data";
