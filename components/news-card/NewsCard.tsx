@@ -6,9 +6,9 @@ interface IProps {
 }
 const NewsCard = ({ news }: IProps) => {
   return (
-    <div>
-      <h3>{news.title}</h3>
+    <div className="p-4">
       <img src={news.image || ""} alt="" width={500} height={200} />
+      <h1>{news.title}</h1>
       <p>{news.description}</p>
     </div>
   );

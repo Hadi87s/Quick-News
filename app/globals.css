@@ -71,6 +71,11 @@ body {
   }
 }
 
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 @layer base {
   * {
     @apply border-border;

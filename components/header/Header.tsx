@@ -6,13 +6,8 @@ import MobileNav from "../navbar/MobileNav";
 
 const Header = () => {
   const [isMenuVisible, setMenuVisible] = useState(false);
-
   useEffect(() => {
-    window.onclick = (e) => {
-      scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+    window.onclick = () => {
       setMenuVisible(false);
     };
   }),
@@ -41,3 +36,6 @@ const Header = () => {
 };
 
 export default Header;
+function useNavigate(): any {
+  throw new Error("Function not implemented.");
+}
