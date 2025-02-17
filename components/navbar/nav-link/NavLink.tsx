@@ -10,7 +10,6 @@ interface IProps {
 
 const NavLink = (props: IProps) => {
   const path = usePathname();
-  console.log(path);
   return (
     <Link
       className={` ${props.mobile ? "p-4 w-full border-b-2 " : ""}${
