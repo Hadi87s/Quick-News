@@ -18,7 +18,6 @@ const NewsList = (props: IProps) => {
 
   const getNews = async () => {
     setP(await props.params);
-    // if (!p.category) return;
     setLoading(true);
 
     fetch(
