@@ -1,9 +1,7 @@
 import React, { Suspense } from "react";
-import { INews, IResponse } from "@/Types/@types";
 import "./loader.css";
 import NewsCard from "@/components/news-card/NewsCard";
 import { fetchNews } from "@/services/fetchNews";
-import { countReset } from "console";
 import Loading from "./loading";
 
 interface IParams {
