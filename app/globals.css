@@ -71,10 +71,10 @@ body {
   }
 }
 
-h1 {
+/* h1 {
   font-size: 2rem;
   font-weight: bold;
-}
+} */
 
 @layer base {
   * {
@@ -85,6 +85,6 @@ h1 {
   }
 }
 
-/* * {
-  all: revert;
-} */
+h1, h2, h3, h4, h5, h6, p {
+  all: revert; /* Restores default styles */
+}
