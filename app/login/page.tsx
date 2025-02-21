@@ -1,11 +1,12 @@
-import React from 'react'
+import SplineScenes from "@/components/spline-robot/SplineScenes";
+import React from "react";
 
 const page = () => {
   return (
     <div>
-      Login Page
+      <SplineScenes />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
