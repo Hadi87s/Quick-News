@@ -7,9 +7,9 @@ export default function NewsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex gap-x-3">
-      <CatAside/>
-      <div className="basis-[70%] ">{children}</div>
+    <div className="block md:flex gap-x-4 p-2 justify-evenly">
+      <CatAside />
+      <div className="basis-[70%]">{children}</div>
     </div>
   );
 }

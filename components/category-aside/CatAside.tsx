@@ -3,7 +3,7 @@ import React from "react";
 
 const CatAside = () => {
   return (
-    <aside className="basis-[30%] h-auto max-w-[300px] bg-zinc-800 text-zinc-100 p-4 rounded-lg shadow-xl">
+    <aside className="hidden md:block basis-[30%] h-auto max-w-[300px] bg-zinc-800 text-zinc-100 p-4 rounded-2xl shadow-xl">
       {/* Related News */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold border-b border-zinc-700 pb-2 mb-3">

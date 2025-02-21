@@ -13,6 +13,7 @@ const fetchNews = async (
   );
 
   const result = (await response.json()) as IResponse;
+  console.log(result);
   let latestNews: INews[] = [];
   if (result.status == "success") {
     latestNews = result.results.map((item) => ({
@@ -20,6 +21,8 @@ const fetchNews = async (
       title: item.title,
       image: item.image_url,
       description: item.description,
+      source_icon: item.source_icon,
+      source_name: item.source_name,
     }));
   } else {
     notFound(); // This will redirect to the 404 page, and it is a prebuilt function from the Next it self (Manual notfound trigger)

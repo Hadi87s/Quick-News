@@ -14,9 +14,9 @@ const NavLink = (props: IProps) => {
     <Link
       className={` ${props.mobile ? "p-4 w-full border-b-2 " : ""}${
         path == props.path
-          ? "text-zinc-50 border-zinc-50"
-          : "text-zinc-500 border-zinc-500"
-      } transition-colors duration-150 hover:text-zinc-50 hover:border-zinc-50`}
+          ? "text-zinc-50 border-b-[2px]"
+          : "text-zinc-300 border-none "
+      } p-2 transition-colors duration-150 hover:text-zinc-50 hover:border-zinc-50`}
       href={props.path}
     >
       {props.children}

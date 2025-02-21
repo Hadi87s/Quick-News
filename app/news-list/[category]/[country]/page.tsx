@@ -29,7 +29,7 @@ const NewsList = async (props: IProps) => {
 
   return (
     <div className="mb-5">
-      <h1>
+      <h1 className="bg-zinc-800 p-4 mt-0 mb-4 rounded-2xl text-center ">
         {country.toUpperCase()}{" "}
         {category.charAt(0).toUpperCase() + category.slice(1)} News
       </h1>
