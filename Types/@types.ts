@@ -21,3 +21,13 @@ interface IResponseNewsItem {
   source_icon: string;
   source_name: string;
 }
+
+export interface INews_ {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string | null;
+  sourceIcon: string;
+  sourceName: string;
+  category: string;
+}

@@ -1,19 +1,34 @@
 import React from "react";
-import Link from "next/link";
 import CatLink from "@/components/category-link/CatLink";
 
 const links = [
   {
-    title: "Sports US",
-    href: "/news-list/sports/us",
+    title: "Technology",
+    href: "/news-list/technology/us",
   },
   {
-    title: "Politics US",
+    title: "Politics",
     href: "/news-list/politics/us",
   },
   {
-    title: "Crime US",
-    href: "/news-list/crime/us",
+    title: "Sports",
+    href: "/news-list/sports/us",
+  },
+  {
+    title: "Business",
+    href: "/news-list/business/us",
+  },
+  {
+    title: "Space",
+    href: "/news-list/Space/us",
+  },
+  {
+    title: "History",
+    href: "/news-list/History/us",
+  },
+  {
+    title: "Environment",
+    href: "/news-list/Environment/us",
   },
 ];
 
