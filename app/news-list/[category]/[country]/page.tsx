@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import "./loader.css";
 import NewsCard from "@/components/news-card/NewsCard";
-import { fetchNews } from "@/services/fetchNews";
+import { getNews } from "@/services/fetchNews";
 import Loading from "./loading";
 
 interface IParams {
@@ -13,8 +13,9 @@ interface IProps {
   params: Promise<IParams>;
 }
 
-const News = async ({ category, country }: IParams) => {
-  const latestNews = await fetchNews(category, country);
+const News = async ({ category }: IParams) => {
+  // const latestNews = await fetchNews(category, country);
+  const latestNews = getNews(category);
   return (
     <div className="grid-cols-1 sm:grid-cols-2 md:grid-cols-2  grid gap-4">
       {latestNews.map((item, index) => (
