@@ -25,13 +25,12 @@ interface IResponseNewsItem {
 export interface INews_ {
   id?: string;
   title: string;
-  description?: string;
+  description: string;
   imageUrl: string | null;
   sourceIcon?: string;
   sourceName?: string;
   category?: string;
   summary: string;
-  content: string;
   date: number;
   author:string;
   author_email: string;

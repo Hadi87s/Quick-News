@@ -13,7 +13,7 @@ interface IProps {
   params: Promise<IParams>;
 }
 
-const News = async ({ category, country }: IParams) => {
+const News = async ({ category }: IParams) => {
   // const latestNews = await fetchNews(category, country);
   const latestNews = getNews(category);
   return (

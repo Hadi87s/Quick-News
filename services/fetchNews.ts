@@ -1,4 +1,4 @@
-import { INews_} from "@/Types/@types";
+import {INews_} from "@/Types/@types";
 import sql from 'better-sqlite3'
 
 const db = sql('news.db');
@@ -13,9 +13,10 @@ const getNewsArticle = (slug: string): INews_ => {
 }
 
 const insertArticle = (data: INews_) => {
+  //TODO: ADD THE REQUIRED FIELDS WHEN YOU TUNE THE DATABASE FOR IT!
   db.prepare(
-    `INSERT INTO news (title, description, imageUrl, source_icon, source_name, category, summary, content, date, author, author_email, slug)
-    VALUES (@title, @description, @imageUrl, @source_icon, @source_name, @category, @summary, @content, @date, @author, @author_email, @slug)`
+    `INSERT INTO news (title, imageUrl, category, description)
+    VALUES (@title, @imageUrl, @category, @description)`
   ).run(
     data
   )

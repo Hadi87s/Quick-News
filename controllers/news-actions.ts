@@ -11,7 +11,7 @@ const addArticle = async (formData: FormData) => {
         title: title,
         imageUrl: formData.get("image")?.toString() || "",
         summary: xss(formData.get("summary")?.toString() || ""),
-        content: xss(formData.get("content")?.toString() || ""),
+        description: xss(formData.get("content")?.toString() || ""),
         date: new Date(formData.get("date")?.toString() || "").getTime() / 1000,
         author: formData.get("author")?.toString() || "",
         author_email: formData.get("author_email")?.toString() || "",
