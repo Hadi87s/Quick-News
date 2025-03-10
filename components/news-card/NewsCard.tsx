@@ -9,13 +9,13 @@ const NewsCard = ({ news }: IProps) => {
     <div className="p-4 bg-zinc-800 rounded-3xl relative">
       <img
         className=" object-cover rounded-2xl m-w-[100%] h-auto aspect-square"
-        src={news.imageUrl || "none"}
+        src={news.image || "none"}
         alt=""
         width={500}
         height={200}
       />
       <h2 className="">{news.title}</h2>
-      <p>{news.description}</p>
+      <p>{news.content}</p>
       <div className="absolute top-4 right-4 flex justify-center gap-x-2 flex-wrap font-bold text-[12px] bg-zinc-600/75 rounded-2xl p-[8px]">
         <span>By {news.sourceName}</span>
         <img

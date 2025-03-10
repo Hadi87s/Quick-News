@@ -5,18 +5,31 @@ import { INews_ } from "@/Types/@types";
 import slugify from "slugify";
 import xss from "xss";
 
-const addArticle = async (formData: FormData) => {
+const addArticle = async (_ : unknown,formData: FormData) => {
+    const error : string[] = [];
     const title = xss(formData.get("title")?.toString() || "");
     const newArticle: INews_ = {
         title: title,
-        imageUrl: formData.get("image")?.toString() || "",
+        image: formData.get("image")?.toString() || "",
         summary: xss(formData.get("summary")?.toString() || ""),
-        description: xss(formData.get("content")?.toString() || ""),
+        content: xss(formData.get("content")?.toString() || ""),
         date: new Date(formData.get("date")?.toString() || "").getTime() / 1000,
+        category: formData.get("category")?.toString() || "",
         author: formData.get("author")?.toString() || "",
         author_email: formData.get("author_email")?.toString() || "",
         slug: slugify(title, {lower: true, trim: true}),
     };
+    console.log(newArticle.image);
+    
+    if(newArticle.date > Date.now()){
+        error.push("The date cannot be in the future!");
+    }
+
+    if(error.length){
+        return {
+            error: error,
+        }
+    }
     insertArticle(newArticle);
     //This will insert the new article to the specified category.
     console.log(newArticle);

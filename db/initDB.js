@@ -1,128 +1,194 @@
-// This will run once just to create our db.
 import sql from 'better-sqlite3';
-import { debugPort } from 'process';
 
+// To run this file (only run it one time), use node ./initDatabase.js
 const db = sql('news.db');
 
-const newsData = [
+const dummyArticles = [
   {
-    title: "New AI Model Surpasses Human Performance",
-    description: "A groundbreaking AI model has achieved unprecedented accuracy in various cognitive tasks.",
-    imageUrl: "https://images.unsplash.com/photo-1726607102396-548750ce07f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Tech Daily",
-    category: "Technology",
+    id: 1,
+    title: 'Local Election Results Announced',
+    slug: 'local-election-results-2025',
+    image: '/images/election.jpg',
+    summary: 'Final results from the 2025 local elections show surprising shifts in voter preferences.',
+    content: `
+      The local elections concluded yesterday with a turnout of 68%. 
+      Key winners include Jane Doe for mayor and several new council members. 
+      Full breakdown available on the official city website.
+    `,
+    author: 'Sarah Miller',
+    author_email: 'sarahmiller@example.com',
+    date: 1740787200000, // March 1, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    title: "Stock Market Hits Record Highs",
-    description: "Investors celebrate as major stock indices reach new all-time highs amid economic recovery.",
-    imageUrl: "https://images.unsplash.com/photo-1560221328-12fe60f83ab8?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Financial Times",
-    category: "Business",
+    id: 2,
+    title: 'New Tech Hub Opens Downtown',
+    slug: 'tech-hub-opening',
+    image: '/images/tech-hub.jpg',
+    summary: 'A state-of-the-art technology center opened today, promising 500 new jobs.',
+    content: `
+      The ribbon-cutting ceremony took place at 10 AM, attended by local officials. 
+      The hub will focus on AI and green tech innovations.
+    `,
+    author: 'Tom Wilson',
+    author_email: 'tomwilson@example.com',
+    date: 1740700800000, // Feb 28, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    title: "Climate Change: A Growing Concern",
-    description: "Scientists warn that global temperatures are rising at an alarming rate.",
-    imageUrl: "https://plus.unsplash.com/premium_photo-1664298311043-46b3814a511f?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Nature Journal",
-    category: "Environment",
+    id: 3,
+    title: 'Weather Alert: Storm Approaching',
+    slug: 'storm-alert-march-2025',
+    image: '/images/storm.jpg',
+    summary: 'Meteorologists warn of heavy rain and winds expected this weekend.',
+    content: `
+      Residents are advised to prepare for potential flooding. 
+      Emergency services are on standby.
+    `,
+    author: 'Lisa Chen',
+    author_email: 'lisachen@example.com',
+    date: 1740787200000, // March 1, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    title: "Breakthrough in Cancer Research",
-    description: "New treatment shows promise in early trials, offering hope for millions worldwide.",
-    imageUrl: "https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Medical News Today",
-    category: "Health",
+    id: 4,
+    title: 'Breakthrough in Renewable Energy',
+    slug: 'renewable-energy-breakthrough',
+    image: '/images/solar.jpg',
+    summary: 'Scientists unveil a new solar panel design with 30% higher efficiency.',
+    content: `
+      The innovation could revolutionize the renewable energy sector. 
+      Testing begins next month with commercial rollout planned for 2026.
+    `,
+    author: 'Dr. Emily Rogers',
+    author_email: 'emilyrogers@example.com',
+    date: 1740614400000, // Feb 27, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    title: "SpaceX Successfully Lands Starship Prototype",
-    description: "The latest test flight marks a major milestone in the journey to Mars.",
-    imageUrl: "https://images.unsplash.com/photo-1517976547714-720226b864c1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Space Explorer",
-    category: "Space",
+    id: 5,
+    title: 'City Marathon Sets New Record',
+    slug: 'city-marathon-2025',
+    image: '/images/marathon.jpg',
+    summary: 'Over 10,000 runners participated in the annual city marathon.',
+    content: `
+      The event raised $500,000 for local charities. 
+      Winner John Smith finished in a record-breaking 2:15:32.
+    `,
+    author: 'Mike Johnson',
+    author_email: 'mikejohnson@example.com',
+    date: 1740528000000, // Feb 26, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    title: "World Cup Finals: Historic Victory",
-    description: "An intense match ends with a historic victory in the World Cup finals.",
-    imageUrl: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Sports Weekly",
-    category: "Sports",
+    id: 6,
+    title: 'New Art Gallery Opens',
+    slug: 'art-gallery-opening',
+    image: '/images/gallery.jpg',
+    summary: 'A modern art gallery featuring local artists debuted today.',
+    content: `
+      The opening exhibition showcases 50 works across various mediums. 
+      Free entry for the first week attracts large crowds.
+    `,
+    author: 'Clara Evans',
+    author_email: 'claraevans@example.com',
+    date: 1740873600000, // March 2, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    title: "Advancements in Quantum Computing",
-    description: "New breakthroughs in quantum computing could revolutionize the tech industry.",
-    imageUrl: "https://images.unsplash.com/photo-1617839625591-e5a789593135?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Tech Innovations",
-    category: "Technology",
+    id: 7,
+    title: 'Stock Market Hits All-Time High',
+    slug: 'stock-market-record',
+    image: '/images/stocks.jpg',
+    summary: 'The national index soared past 40,000 points yesterday.',
+    content: `
+      Tech and energy sectors led the surge. 
+      Analysts predict cautious optimism for the coming months.
+    `,
+    author: 'Robert Lee',
+    author_email: 'robertlee@example.com',
+    date: 1740700800000, // Feb 28, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    title: "New Legislation Aims to Tackle Cybercrime",
-    description: "Governments worldwide introduce new laws to combat rising cyber threats.",
-    imageUrl: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Global News",
-    category: "Politics",
+    id: 8,
+    title: 'Rare Bird Spotted in National Park',
+    slug: 'rare-bird-sighting',
+    image: '/images/bird.jpg',
+    summary: 'Birdwatchers flock to see a species not seen here in decades.',
+    content: `
+      The sighting of the elusive azure-winged hawk has excited ornithologists. 
+      Park officials urge visitors to respect wildlife habitats.
+    `,
+    author: 'Anna Patel',
+    author_email: 'annapatel@example.com',
+    date: 1740960000000, // March 3, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    title: "Electric Vehicles Gain Popularity Worldwide",
-    description: "Sales of electric vehicles continue to grow as governments push for cleaner transportation.",
-    imageUrl: "https://plus.unsplash.com/premium_photo-1715789261470-fb25ffbf70d3?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Green Tech",
-    category: "Technology",
+    id: 9,
+    title: 'New Public Transit Line Approved',
+    slug: 'transit-line-approval',
+    image: '/images/transit.jpg',
+    summary: 'City council greenlights a $200M subway extension project.',
+    content: `
+      The new line will connect downtown to the eastern suburbs. 
+      Construction is set to begin in Q3 2025.
+    `,
+    author: 'David Kim',
+    author_email: 'davidkim@example.com',
+    date: 1740614400000, // Feb 27, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    title: "Major Data Breach Exposes Millions of Users",
-    description: "A large-scale data breach has compromised the personal data of millions of users.",
-    imageUrl: "https://images.unsplash.com/photo-1613677135043-a2512fbf49fa?q=80&w=1944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Cyber Daily",
-    category: "Technology",
+    id: 10,
+    title: 'Annual Film Festival Kicks Off',
+    slug: 'film-festival-2025',
+    image: '/images/film.jpg',
+    summary: 'The 25th annual film festival opens with a star-studded gala.',
+    content: `
+      Over 100 films will be screened over the next 10 days. 
+      Highlights include a retrospective of director Mia Torres’ work.
+    `,
+    author: 'Sophie Brown',
+    author_email: 'sophiebrown@example.com',
+    date: 1740873600000, // March 2, 2025 00:00:00 UTC
+    category: 'global'
   },
-  {
-    title: "Archaeologists Discover Lost Civilization Ruins",
-    description: "An ancient civilization's ruins have been uncovered, providing new insights into history.",
-    imageUrl: "https://images.unsplash.com/photo-1572905421176-6fa2f11a236e?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "History Today",
-    category: "History",
-  },
-  {
-    title: "Wildlife Conservation Efforts Show Positive Results",
-    description: "Conservation programs have helped restore endangered species populations worldwide.",
-    imageUrl: "https://images.unsplash.com/photo-1464039397811-476f652a343b?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    sourceIcon: "/newspaper.png",
-    sourceName: "Wildlife Journal",
-    category: "Environment",
-  }
 ];
 
-
 db.prepare(`
-    CREATE TABLE IF NOT EXISTS news (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
-        description TEXT NOT NULL,
-        imageUrl TEXT NOT NULL,
-        sourceIcon TEXT NOT NULL,
-        sourceName TEXT NOT NULL,
-        category TEXT NOT NULL
-    )
-    `).run();
+  CREATE TABLE IF NOT EXISTS articles (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    slug TEXT NOT NULL UNIQUE,
+    title TEXT NOT NULL,
+    image TEXT NOT NULL,
+    summary TEXT NOT NULL,
+    content TEXT NOT NULL,
+    author TEXT NOT NULL,
+    author_email TEXT NOT NULL,
+    date INTEGER NOT NULL
+    category TEXT NOT NULL
+  ) `).run();
 
 const insertData = () => {
-    const insertCommand = db.prepare(`
-        INSERT INTO news (title, description, imageUrl, sourceIcon, sourceName, "category") VALUES (@title,@description,@imageUrl,@sourceIcon,@sourceName, @category)`);
+  const insertCommand = db.prepare(`
+    INSERT INTO articles VALUES (
+      @id,
+      @slug,
+      @title,
+      @image,
+      @summary,
+      @content,
+      @author,
+      @author_email,
+      @date
+      @category
+    )`);
 
-    for (const item of newsData) {
-        insertCommand.run(item);
-    }
+  for (const article of dummyArticles) {
+    insertCommand.run(article);
+  }
 }
 
 insertData();
