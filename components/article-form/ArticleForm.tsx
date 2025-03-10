@@ -4,7 +4,7 @@ import { addArticle } from '@/controllers/news-actions';
 import React, { useActionState } from 'react'
 
 const ArticleForm = () => {
-    const [state, ActionForm, pending] = useActionState(addArticle, {error: []});
+    const [state, ActionForm, pending] = useActionState(addArticle, {errors: []});
   return (
     <form className="space-y-6" action={ActionForm}>
     <div className="space-y-2">
@@ -87,6 +87,13 @@ const ArticleForm = () => {
       <input type="hidden" name="author" value="Sarah Miller" />
       <input type="hidden" name="author_email" value="sarahmiller@example.com" />
     </div>
+    <ul className=''>
+      {
+        state?.errors.map((error, index) => (
+          <li key={index} className='text-red-500'>{error}</li>
+        ))
+      }
+    </ul>
     <div className="pt-4">
       <button
         type="submit"

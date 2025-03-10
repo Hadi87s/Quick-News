@@ -6,7 +6,7 @@ import slugify from "slugify";
 import xss from "xss";
 
 const addArticle = async (_ : unknown,formData: FormData) => {
-    const error : string[] = [];
+    const errors : string[] = [];
     const title = xss(formData.get("title")?.toString() || "");
     const newArticle: INews_ = {
         title: title,
@@ -22,12 +22,12 @@ const addArticle = async (_ : unknown,formData: FormData) => {
     console.log(newArticle.image);
     
     if(newArticle.date > Date.now()){
-        error.push("The date cannot be in the future!");
+        errors.push("The date cannot be in the future!");
     }
 
-    if(error.length){
+    if(errors.length){
         return {
-            error: error,
+            errors: errors,
         }
     }
     insertArticle(newArticle);
